@@ -1,0 +1,26 @@
+﻿<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UpdateComment", "Post", FormMethod.Post))
+                {
+                    @Html.Hidden("CommentId", null, new { id = "commentId" })
+                    @Html.Hidden("PostId", null, new { id = "PostId" })
+                    @Html.Hidden("PageNum", null, new { id = "PageId" })
+
+                    <div class="form-group">
+                        @Html.Label("Your Comment")
+                        @Html.TextArea("Text", new { id = "commetText", @class = "form-control" })
+                    </div>
+                    <button class="btn btn-info btn-block">Save changes</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@using FirstExample.Core.Entities.Dto
+@using FirstExample.WebUI.Models
+@model Pagination<PostWithAuthor>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="card hoverable">
+        <div class="card-header">
+            @Html.ActionLink("Create post", "Create", "Post", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                @if (Model.Items.Any())
+                {
+                    foreach (PostWithAuthor p in Model.Items)
+                    {
+                        <li class="list-group-item">
+                            <div class="post">
+                                <div class="post-info">
+                                    @Html.ActionLink(p.Name, "Open", new { id = p.Id }, new { @class = "post-header" })
+                                    <p class="post-author">by <span class="font-weight-bold">@p.Author</span></p>
+                                </div>
+                                <div class="btn btn-primary">
+                                    <span class="d-none d-md-inline-block">Comments</span> <span class="badge badge-light">@p.CommentsQuantity</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="list-group-item">
+                        There are no any posts yet. Create one if you need.
+                    </li>
+                }
+
+            </ul>
+        </div>
+        @{ 
+            Html.RenderPartial("Pagination", Model.PageInfo);
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,32 @@
+﻿@using FirstExample.WebUI.Models
+@model AccountLogin
+@{
+    ViewBag.Title = "Login";
+}
+<div class="auth-box mx-auto card hoverable">
+    <div class="card-header bg-primary">
+        <h3 class="text-light">Login</h3>
+    </div>
+
+    <div class="card-body">
+        <p class="">@TempData["Info"]</p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+
+            </div>
+            <button class="btn btn-primary btn-block">Login</button>
+        }
+        @Html.ActionLink("Create new account", "Registration", null, new { @class = "btn btn-info btn-block cross-link" })
+
+    </div>
+</div>

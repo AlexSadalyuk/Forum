@@ -1,0 +1,15 @@
+﻿<div class="container nav-box">
+    @Html.ActionLink("Silver's Forum", "Index", "Post", null, new { @class = "text-light btn btn-primary" })
+    <div class="login-box">
+        @if (ViewBag.IsSignIn)
+        {
+            <h3 class="text-light username">Hello, @ViewBag.UserName</h3>
+            @Html.ActionLink("Logout", "Logout", "Account", new { @class = "btn btn-primary" })
+        }
+        else
+        {
+            @Html.ActionLink("Login", "Login", "Account", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Registration", "Registration", "Account", new { @class = "btn btn-primary" })
+        }
+    </div>
+</div>

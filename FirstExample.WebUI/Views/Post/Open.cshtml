@@ -1,0 +1,93 @@
+﻿@using FirstExample.Core.Entities.Dto
+@using FirstExample.WebUI.Models
+@model PostWithComments
+@{
+    ViewBag.Title = "Post";
+}
+<div class="container card">
+    @*<div class="card-header">
+        @Html.ActionLink("Back", "Index", new { id = TempData["Page"] }, new { @class = "btn btn-info"})
+    </div>*@
+    <div class="card-body">
+
+        <ul class="list-group">
+            <li>
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <h3 class="text-light">@Model.Name</h3>
+                    </div>
+                    <div class="card-body post-main">
+                        <div class="post-description">
+                            <ul>
+                                <li>Author: <span class="font-weight-bold">@Model.Author</span></li>
+                                <li>Published: @Model.DateTime.ToString()</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p>
+                                @Model.Description
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            @if (Model.Comments.Items.Any())
+            {
+                foreach (EditableComment p in Model.Comments.Items)
+                {
+                    <li class="post-items">
+                        <div class="card">
+                            @if (p.IsAbleToEdit)
+                            {
+                                <div class="card-header bg-success">
+                                    <h3 class="text-light">@Model.Name</h3>
+                                    <button class="btn btn-primary edit"
+                                            data-toggle="modal"
+                                            data-target="#modal"
+                                            data-text="@p.Text"
+                                            data-comment="@p.CommentId"
+                                            data-post="@p.PostId"
+                                            data-page="@Model.Comments.PageInfo.CurrPage">
+                                        Edit
+                                    </button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card-header">
+                                    <h3>@Model.Name</h3>
+                                </div>
+                            }
+
+                            <div class="card-body post-main">
+                                <div class="post-description">
+                                    <ul>
+                                        <li>Author: <span class="font-weight-bold">@p.Author</span></li>
+                                        <li>Published: @p.DateTime.ToString()</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p>
+                                        @p.Text
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item text-primary">
+                    There are no any comments yet. Create one if you need.
+                </li>
+            }
+        </ul>
+        
+        @{
+            Html.RenderPartial("Pagination", Model.Comments.PageInfo);
+            Html.RenderPartial("CreateComment", new CommentCreate());
+            Html.RenderPartial("UpdateComment");
+        }
+    </div>
+</div>
