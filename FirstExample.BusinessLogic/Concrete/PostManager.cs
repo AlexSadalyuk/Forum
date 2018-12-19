@@ -52,7 +52,7 @@ namespace FirstExample.BusinessLogic.Concrete
                 {
                     Name = post.Name,
                     Description = post.Description,
-                    Author = post.User?.Name ?? "noname",
+                    Author = author,
                     DateTime = post.DateTime,
                     Comments = new Pagination<EditableComment>
                     {
